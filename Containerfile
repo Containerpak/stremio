@@ -24,7 +24,7 @@ RUN printf '%s\n' \
       > /etc/apt/sources.list.d/noble.list && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-      nodejs libmpv1 qml-module-qt-labs-folderlistmodel \
+      nodejs libmpv2 qml-module-qt-labs-folderlistmodel \
       qml-module-qt-labs-platform qml-module-qt-labs-settings \
       qml-module-qtquick-controls qml-module-qtquick-dialogs \
       qml-module-qtwebchannel qml-module-qtwebengine \
