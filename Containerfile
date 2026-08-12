@@ -19,7 +19,7 @@ RUN cargo build --release && \
     install -Dm755 target/release/stremio-linux-shell /out/usr/bin/stremio && \
     install -Dm644 data/com.stremio.Stremio.desktop /out/usr/share/applications/com.stremio.Stremio.desktop && \
     install -Dm644 data/com.stremio.Stremio.gschema.xml /out/usr/share/glib-2.0/schemas/com.stremio.Stremio.gschema.xml && \
-    install -Dm644 data/icons/hicolor/scalable/apps/com.stremio.Stremio.svg /out/usr/share/icons/hicolor/scalable/apps/com.stremio.Stremio.svg
+    install -Dm644 data/icons/com.stremio.Stremio.svg /out/usr/share/icons/hicolor/scalable/apps/com.stremio.Stremio.svg
 
 FROM ghcr.io/containerpak/gtk:main
 
