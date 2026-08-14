@@ -1,16 +1,10 @@
 FROM ubuntu:26.04 AS source
 
-ARG STREMIO_VERSION=4.4.168
-ARG STREMIO_SHA256=1028f1a38a70fc66bfcda1c8a9e1674231e17ac81774fc48859ed8f53c7a6039
+ADD --checksum=sha256:1028f1a38a70fc66bfcda1c8a9e1674231e17ac81774fc48859ed8f53c7a6039 https://dl.strem.io/shell-linux/v4.4.168/stremio_4.4.168-1_amd64.deb /tmp/stremio.deb
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates curl dpkg && \
-    curl --fail --location --output /tmp/stremio.deb \
-      "https://dl.strem.io/shell-linux/v${STREMIO_VERSION}/stremio_${STREMIO_VERSION}-1_amd64.deb" && \
-    echo "${STREMIO_SHA256}  /tmp/stremio.deb" | sha256sum --check && \
-    dpkg-deb --extract /tmp/stremio.deb /out
+RUN dpkg-deb --extract /tmp/stremio.deb /out
 
-FROM ghcr.io/containerpak/mesa:main
+FROM ghcr.io/containerpak/mesa64:main
 
 LABEL org.opencontainers.image.source="https://github.com/Containerpak/stremio"
 
