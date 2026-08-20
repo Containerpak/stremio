@@ -11,5 +11,5 @@ cpak install github.com/containerpak/stremio
 Start it from the application menu or by running:
 
 ```bash
-cpak run github.com/containerpak/stremio stremio
+cpak run github.com/containerpak/stremio stremio-cpak
 ```

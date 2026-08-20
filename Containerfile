@@ -1,15 +1,8 @@
-FROM ubuntu:26.04 AS source
-
-ADD --checksum=sha256:1028f1a38a70fc66bfcda1c8a9e1674231e17ac81774fc48859ed8f53c7a6039 https://dl.strem.io/shell-linux/v4.4.168/stremio_4.4.168-1_amd64.deb /tmp/stremio.deb
-
-RUN dpkg-deb --extract /tmp/stremio.deb /out
-
 FROM ghcr.io/containerpak/mesa64:main
 
 LABEL org.opencontainers.image.source="https://github.com/Containerpak/stremio"
 
-COPY --from=source /out/ /
-COPY stremio /usr/bin/stremio
+COPY stremio /usr/local/bin/stremio-cpak
 COPY com.stremio.Stremio.desktop /usr/share/applications/com.stremio.Stremio.desktop
 
 RUN printf '%s\n' \
@@ -23,6 +16,7 @@ RUN printf '%s\n' \
       qml-module-qtquick-controls qml-module-qtquick-dialogs \
       qml-module-qtwebchannel qml-module-qtwebengine \
       librubberband2 libuchardet0 libfdk-aac2 && \
-    install -Dm644 /opt/stremio/icons/smartcode-stremio_128.png /usr/share/icons/hicolor/128x128/apps/com.stremio.Stremio.png && \
-    chmod 0755 /usr/bin/stremio && \
+    mkdir -p /usr/share/icons/hicolor/128x128/apps && \
+    ln -s /opt/stremio/icons/smartcode-stremio_128.png /usr/share/icons/hicolor/128x128/apps/com.stremio.Stremio.png && \
+    chmod 0755 /usr/local/bin/stremio-cpak && \
     cpak-clean-junk
