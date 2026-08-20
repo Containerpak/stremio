@@ -57,7 +57,7 @@ jobs:
       - name: Verify package exports
         run: |
           docker pull ghcr.io/containerpak/stremio:main
-          docker run --rm --entrypoint /bin/sh ghcr.io/containerpak/stremio:main -ec 'test -x /usr/bin/stremio && test -f /usr/share/applications/com.stremio.Stremio.desktop'
+          docker run --rm --entrypoint /bin/sh ghcr.io/containerpak/stremio:main -ec 'test -x /usr/local/bin/stremio-cpak && test -f /usr/share/applications/com.stremio.Stremio.desktop && test ! -e /usr/bin/stremio'
 
       - name: Publish summary
         run: echo "ghcr.io/containerpak/stremio@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
