@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /opt/stremio/stremio "$@"
+exec /usr/bin/stremio "$@"

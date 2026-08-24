@@ -59,6 +59,19 @@ jobs:
           docker pull ghcr.io/containerpak/stremio:main
           docker run --rm --entrypoint /bin/sh ghcr.io/containerpak/stremio:main -ec 'test -x /usr/local/bin/stremio-cpak && test -f /usr/share/applications/com.stremio.Stremio.desktop && test ! -e /usr/bin/stremio'
 
+          source_url="$(jq -r '.runtime_sources[0].url' cpak.json)"
+          source_sha="$(jq -r '.runtime_sources[0].sha256' cpak.json)"
+          curl -fsSL "$source_url" -o stremio.deb
+          printf '%s  %s\n' "$source_sha" stremio.deb | sha256sum -c -
+          docker run --rm \
+            -v "$PWD/stremio.deb:/tmp/stremio.deb:ro" \
+            --entrypoint /bin/sh ghcr.io/containerpak/stremio:main -ec '
+              dpkg-deb -x /tmp/stremio.deb /
+              test -x /usr/bin/stremio
+              test -x /usr/libexec/stremio/stremio
+              ! ldd /usr/libexec/stremio/stremio | grep -q "not found"
+            '
+
       - name: Publish summary
         run: echo "ghcr.io/containerpak/stremio@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
 
