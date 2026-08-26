@@ -70,6 +70,9 @@ jobs:
               test -x /usr/bin/stremio
               test -x /usr/libexec/stremio/stremio
               ! ldd /usr/libexec/stremio/stremio | grep -q "not found"
+              XDG_RUNTIME_DIR=/tmp timeout 5s /usr/local/bin/stremio-cpak >/tmp/stremio.log 2>&1 || true
+              grep -aFq com.stremio.Stremio /tmp/stremio-schemas/gschemas.compiled
+              ! grep -Fq "Settings schema" /tmp/stremio.log
             '
 
       - name: Publish summary

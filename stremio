@@ -1,2 +1,9 @@
 #!/bin/sh
+schema_dir="${XDG_RUNTIME_DIR:-/tmp}/stremio-schemas"
+if [ ! -f "$schema_dir/gschemas.compiled" ]; then
+    mkdir -p "$schema_dir"
+    cp /usr/share/glib-2.0/schemas/com.stremio.Stremio.gschema.xml "$schema_dir/"
+    /usr/lib/x86_64-linux-gnu/glib-2.0/glib-compile-schemas "$schema_dir"
+fi
+export GSETTINGS_SCHEMA_DIR="$schema_dir"
 exec /usr/bin/stremio "$@"
