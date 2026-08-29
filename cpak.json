@@ -24,11 +24,13 @@
   "addons": [],
   "idle_time": 0,
   "override": {
+    "displayX11": false,
     "socketWayland": true,
     "socketPulseAudio": true,
     "socketSshAgent": false,
     "socketCups": false,
     "socketGpgAgent": false,
+    "bluetooth": false,
     "deviceDri": true,
     "deviceKvm": false,
     "deviceShm": true,
@@ -37,9 +39,13 @@
     "deviceFuse": false,
     "deviceTun": false,
     "deviceUsb": false,
+    "deviceSerial": false,
+    "deviceInput": false,
+    "deviceTTY": false,
     "deviceAll": false,
     "notification": true,
     "openURI": true,
+    "hostApplications": false,
     "filesystem": [
       {
         "path": "home",
