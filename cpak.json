@@ -4,7 +4,7 @@
   "name": "Stremio",
   "description": "Freedom to stream.",
   "version": "1.1.2",
-  "image": "ghcr.io/containerpak/stremio@sha256:6c7a176b97d4361833feb3fc298256ca89eebad3e1cc916b0be631176203bef5",
+  "image": "ghcr.io/containerpak/stremio@sha256:bcb594246b9eb63eac1cd9dfd1144db67223c43c6322de6549a09dacd15eab3e",
   "runtime_sources": [
     {
       "name": "stremio_1.1.2-1_amd64.deb",
